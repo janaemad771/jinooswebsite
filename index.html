@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>the daily scroll · modern moodboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #070b17 0%, #12182e 50%, #191f3c 100%);
+            font-family: system-ui, 'Inter', -apple-system, 'Segoe UI', 'SF Pro Text', sans-serif;
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+        }
+
+        .dashboard {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: rgba(10, 14, 26, 0.68);
+            backdrop-filter: blur(10px);
+            border-radius: 2.2rem;
+            padding: 2rem 2rem 2rem 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(100, 120, 200, 0.25);
+        }
+
+        .header-area {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .header-area h1 {
+            font-size: clamp(2rem, 8vw, 3.6rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #bdf2ff, #a28eff, #ffa0cc);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            font-family: 'SF Mono', 'Courier New', monospace;
+        }
+
+        .header-area p {
+            color: #b2bef5;
+            margin-top: 0.6rem;
+            font-size: 0.95rem;
+            background: rgba(0, 0, 0, 0.35);
+            display: inline-block;
+            padding: 0.3rem 1.4rem;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+        }
+
+        .animated-now {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2.8rem;
+        }
+
+        .now-card {
+            background: linear-gradient(115deg, #202645, #151b36);
+            padding: 1rem 2rem;
+            border-radius: 3rem;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+            display: inline-flex;
+            align-items: center;
+            gap: 1.3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            border: 1px solid rgba(140, 130, 255, 0.5);
+        }
+
+        .pulse-dot {
+            width: 12px;
+            height: 12px;
+            background: #4affb5;
+            border-radius: 50%;
+            animation: pulseLive 1.2s infinite ease;
+            box-shadow: 0 0 8px #4affb5;
+        }
+
+        @keyframes pulseLive {
+            0% { opacity: 0.5; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .now-text {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #eef3ff;
+            letter-spacing: -0.2px;
+        }
+
+        .track-name {
+            background: #2a2552;
+            padding: 0.25rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-family: monospace;
+            color: #ffe0aa;
+        }
+
+        .loading-spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-top: 2px solid #ffaa77;
+            border-radius: 50%;
+            animation: spinLoader 0.85s infinite linear;
+        }
+
+        @keyframes spinLoader {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .interest-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.6rem;
+            margin: 2rem 0 2rem 0;
+        }
+
+        .vibe-card {
+            background: rgba(18, 22, 48, 0.92);
+            backdrop-filter: blur(4px);
+            border-radius: 1.8rem;
+            padding: 1.3rem 1rem 1.5rem 1rem;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(140, 130, 220, 0.35);
+            box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .vibe-card:hover {
+            transform: translateY(-5px);
+            background: #252c51e6;
+            border-color: #ffb292;
+        }
+
+        .card-emoji {
+            font-size: 3rem;
+            filter: drop-shadow(0 4px 6px #00000050);
+            margin-bottom: 0.4rem;
+        }
+
+        .vibe-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0.4rem 0;
+            color: #f0f2ff;
+        }
+
+        .vibe-card p {
+            color: #c5cef5;
+            font-size: 0.85rem;
+            line-height: 1.45;
+            margin: 0.4rem 0 0.8rem;
+        }
+
+        .tag {
+            background: #0a0e1fcc;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #cfc2ff;
+        }
+
+        .trends-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.9rem;
+            margin: 1.8rem 0 1.2rem;
+            padding: 1rem 0.3rem;
+            border-top: 1px solid rgba(150, 130, 230, 0.45);
+            border-bottom: 1px solid rgba(150, 130, 230, 0.45);
+        }
+
+        .trend-item {
+            background: #10152fe6;
+            border-radius: 80px;
+            padding: 0.5rem 1.3rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            backdrop-filter: blur(2px);
+            color: #d4deff;
+            transition: 0.1s linear;
+        }
+
+        .trend-item:hover {
+            background: #1f2650;
+            color: #ffe1b3;
+        }
+
+        .footer-note {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 2rem;
+            padding: 0.9rem 1.2rem;
+            margin-top: 1.8rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #a7b2e3;
+        }
+
+        @media (max-width: 720px) {
+            .interest-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            
+            .vibe-card {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                text-align: left;
+                gap: 0.6rem;
+                padding: 1rem;
+                border-left: 6px solid #ffa07a;
+                border-radius: 1.3rem;
+            }
+            
+            .card-emoji {
+                font-size: 2.2rem;
+                margin-bottom: 0;
+            }
+            
+            .vibe-card h3, .vibe-card p {
+                text-align: left;
+                width: 100%;
+            }
+            
+            .tag {
+                align-self: flex-start;
+            }
+            
+            .now-card {
+                padding: 0.8rem 1.3rem;
+                gap: 0.9rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .vibe-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                border-left: none;
+                border-top: 5px solid #ffa07a;
+            }
+            .vibe-card h3, .vibe-card p {
+                text-align: center;
+            }
+            .dashboard {
+                padding: 1.2rem;
+            }
+            .trend-item {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <div class="header-area">
+        <h1>⌇ the daily scroll ⌇</h1>
+        <p>vibes · playlists · brainrot · today's interests</p>
+    </div>
+
+    <div class="animated-now">
+        <div class="now-card">
+            <div class="pulse-dot"></div>
+            <span class="now-text">🎧 now playing</span>
+            <span class="track-name">"Jealousy Jealousy" — Olivia rodrigo.</span>
+            <div class="loading-spinner"></div>
+            <span style="font-size:0.7rem; color:#ceb7ff;">● live</span>
+        </div>
+    </div>
+
+    <div class="interest-grid">
+        <div class="vibe-card">
+            <div class="card-emoji">🎧</div>
+            <h3>playlist rot</h3>
+            <p>curating the perfect "walk to train station" mix, 8 versions of the same song.</p>
+            <div class="tag">#spotifywrapped</div>
+        </div>
+        <div class="vibe-card">
+            <div class="card-emoji">📱</div>
+            <h3>doomscrolling</h3>
+            <p>2am tiktok edits, reddit deep dives, mutuals posting cryptic stuff.</p>
+            <div class="tag">#noscroll</div>
+        </div>
+        <div class="vibe-card">
+            <div class="card-emoji">☕</div>
+            <h3>cafe study mode</h3>
+            <p>lofi girl but it's 2026, matcha latte and a laptop full of tabs.</p>
+            <div class="tag">#productivity</div>
+        </div>
+        <div class="vibe-card">
+            <div class="card-emoji">🎮</div>
+            <h3>cozy gaming</h3>
+            <p>stardew clones, indie gems, and the same 3 comfort games.</p>
+            <div class="tag">#gaming</div>
+        </div>
+        <div class="vibe-card">
+            <div class="card-emoji">📸</div>
+            <h3>digicam revival</h3>
+            <p>grainy flash pics, old digicams, '00s aesthetic but fresh.</p>
+            <div class="tag">#y2k2026</div>
+        </div>
+        <div class="vibe-card">
+            <div class="card-emoji">🧠</div>
+            <h3>brain empty</h3>
+            <p>overstimulated but bored, groupchats, memes and existential dread.</p>
+            <div class="tag">#relatable</div>
+        </div>
+        <div><br>made by someone who doomscrolls too</div>
+<script>
+    (function() {
+        console.log("💿 the daily scroll — handcrafted with intention");
+        const allCards = document.querySelectorAll('.vibe-card');
+        if (allCards.length) {
+            allCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const titleElem = card.querySelector('h3');
+                    if (titleElem) {
+                        console.log(`✨ vibe check: ${titleElem.innerText}`);
+                    }
+                });
+            });
+        }
+    })();
+</script>
+</body>
+</html>
