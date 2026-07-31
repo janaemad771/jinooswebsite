@@ -2,348 +2,156 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>the daily scroll · modern moodboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Gallery</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(145deg, #070b17 0%, #12182e 50%, #191f3c 100%);
-            font-family: system-ui, 'Inter', -apple-system, 'Segoe UI', 'SF Pro Text', sans-serif;
-            min-height: 100vh;
-            padding: 2rem 1.5rem;
-        }
-
-        .dashboard {
-            max-width: 1300px;
-            margin: 0 auto;
-            background: rgba(10, 14, 26, 0.68);
-            backdrop-filter: blur(10px);
-            border-radius: 2.2rem;
-            padding: 2rem 2rem 2rem 2rem;
-            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(100, 120, 200, 0.25);
-        }
-
-        .header-area {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .header-area h1 {
-            font-size: clamp(2rem, 8vw, 3.6rem);
-            font-weight: 700;
-            background: linear-gradient(135deg, #bdf2ff, #a28eff, #ffa0cc);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.02em;
-            font-family: 'SF Mono', 'Courier New', monospace;
-        }
-
-        .header-area p {
-            color: #b2bef5;
-            margin-top: 0.6rem;
-            font-size: 0.95rem;
-            background: rgba(0, 0, 0, 0.35);
-            display: inline-block;
-            padding: 0.3rem 1.4rem;
-            border-radius: 60px;
-            backdrop-filter: blur(4px);
-        }
-
-        .animated-now {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 2.8rem;
-        }
-
-        .now-card {
-            background: linear-gradient(115deg, #202645, #151b36);
-            padding: 1rem 2rem;
-            border-radius: 3rem;
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
-            display: inline-flex;
-            align-items: center;
-            gap: 1.3rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            border: 1px solid rgba(140, 130, 255, 0.5);
-        }
-
-        .pulse-dot {
-            width: 12px;
-            height: 12px;
-            background: #4affb5;
-            border-radius: 50%;
-            animation: pulseLive 1.2s infinite ease;
-            box-shadow: 0 0 8px #4affb5;
-        }
-
-        @keyframes pulseLive {
-            0% { opacity: 0.5; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.2); }
-        }
-
-        .now-text {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: #eef3ff;
-            letter-spacing: -0.2px;
-        }
-
-        .track-name {
-            background: #2a2552;
-            padding: 0.25rem 1.2rem;
-            border-radius: 60px;
-            font-size: 0.85rem;
-            font-family: monospace;
-            color: #ffe0aa;
-        }
-
-        .loading-spinner {
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-top: 2px solid #ffaa77;
-            border-radius: 50%;
-            animation: spinLoader 0.85s infinite linear;
-        }
-
-        @keyframes spinLoader {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .interest-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1.6rem;
-            margin: 2rem 0 2rem 0;
-        }
-
-        .vibe-card {
-            background: rgba(18, 22, 48, 0.92);
-            backdrop-filter: blur(4px);
-            border-radius: 1.8rem;
-            padding: 1.3rem 1rem 1.5rem 1rem;
-            transition: all 0.2s ease;
-            border: 1px solid rgba(140, 130, 220, 0.35);
-            box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .vibe-card:hover {
-            transform: translateY(-5px);
-            background: #252c51e6;
-            border-color: #ffb292;
-        }
-
-        .card-emoji {
-            font-size: 3rem;
-            filter: drop-shadow(0 4px 6px #00000050);
-            margin-bottom: 0.4rem;
-        }
-
-        .vibe-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin: 0.4rem 0;
-            color: #f0f2ff;
-        }
-
-        .vibe-card p {
-            color: #c5cef5;
-            font-size: 0.85rem;
-            line-height: 1.45;
-            margin: 0.4rem 0 0.8rem;
-        }
-
-        .tag {
-            background: #0a0e1fcc;
-            padding: 0.2rem 1rem;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: #cfc2ff;
-        }
-
-        .trends-flex {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.9rem;
-            margin: 1.8rem 0 1.2rem;
-            padding: 1rem 0.3rem;
-            border-top: 1px solid rgba(150, 130, 230, 0.45);
-            border-bottom: 1px solid rgba(150, 130, 230, 0.45);
-        }
-
-        .trend-item {
-            background: #10152fe6;
-            border-radius: 80px;
-            padding: 0.5rem 1.3rem;
-            font-size: 0.85rem;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            backdrop-filter: blur(2px);
-            color: #d4deff;
-            transition: 0.1s linear;
-        }
-
-        .trend-item:hover {
-            background: #1f2650;
-            color: #ffe1b3;
-        }
-
-        .footer-note {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 2rem;
-            padding: 0.9rem 1.2rem;
-            margin-top: 1.8rem;
-            text-align: center;
-            font-size: 0.75rem;
-            color: #a7b2e3;
-        }
-
-        @media (max-width: 720px) {
-            .interest-grid {
-                grid-template-columns: 1fr;
-                gap: 1.2rem;
-            }
-            
-            .vibe-card {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: flex-start;
-                text-align: left;
-                gap: 0.6rem;
-                padding: 1rem;
-                border-left: 6px solid #ffa07a;
-                border-radius: 1.3rem;
-            }
-            
-            .card-emoji {
-                font-size: 2.2rem;
-                margin-bottom: 0;
-            }
-            
-            .vibe-card h3, .vibe-card p {
-                text-align: left;
-                width: 100%;
-            }
-            
-            .tag {
-                align-self: flex-start;
-            }
-            
-            .now-card {
-                padding: 0.8rem 1.3rem;
-                gap: 0.9rem;
-            }
-        }
-
-        @media (max-width: 500px) {
-            .vibe-card {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                border-left: none;
-                border-top: 5px solid #ffa07a;
-            }
-            .vibe-card h3, .vibe-card p {
-                text-align: center;
-            }
-            .dashboard {
-                padding: 1.2rem;
-            }
-            .trend-item {
-                font-size: 0.7rem;
-                padding: 0.3rem 0.9rem;
-            }
-        }
+        body { margin: 0; overflow: hidden; background: #0b0e17; }
     </style>
 </head>
 <body>
 
-<div class="dashboard">
-    <div class="header-area">
-        <h1>⌇ the daily scroll ⌇</h1>
-        <p>vibes · playlists · brainrot · today's interests</p>
-    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0b0e17);
 
-    <div class="animated-now">
-        <div class="now-card">
-            <div class="pulse-dot"></div>
-            <span class="now-text">🎧 now playing</span>
-            <span class="track-name">"Jealousy Jealousy" — Olivia rodrigo.</span>
-            <div class="loading-spinner"></div>
-            <span style="font-size:0.7rem; color:#ceb7ff;">● live</span>
-        </div>
-    </div>
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 2, 7);
+        camera.lookAt(0, 0, 0);
 
-    <div class="interest-grid">
-        <div class="vibe-card">
-            <div class="card-emoji">🎧</div>
-            <h3>playlist rot</h3>
-            <p>curating the perfect "walk to train station" mix, 8 versions of the same song.</p>
-            <div class="tag">#spotifywrapped</div>
-        </div>
-        <div class="vibe-card">
-            <div class="card-emoji">📱</div>
-            <h3>doomscrolling</h3>
-            <p>2am tiktok edits, reddit deep dives, mutuals posting cryptic stuff.</p>
-            <div class="tag">#noscroll</div>
-        </div>
-        <div class="vibe-card">
-            <div class="card-emoji">☕</div>
-            <h3>cafe study mode</h3>
-            <p>lofi girl but it's 2026, matcha latte and a laptop full of tabs.</p>
-            <div class="tag">#productivity</div>
-        </div>
-        <div class="vibe-card">
-            <div class="card-emoji">🎮</div>
-            <h3>cozy gaming</h3>
-            <p>stardew clones, indie gems, and the same 3 comfort games.</p>
-            <div class="tag">#gaming</div>
-        </div>
-        <div class="vibe-card">
-            <div class="card-emoji">📸</div>
-            <h3>digicam revival</h3>
-            <p>grainy flash pics, old digicams, '00s aesthetic but fresh.</p>
-            <div class="tag">#y2k2026</div>
-        </div>
-        <div class="vibe-card">
-            <div class="card-emoji">🧠</div>
-            <h3>brain empty</h3>
-            <p>overstimulated but bored, groupchats, memes and existential dread.</p>
-            <div class="tag">#relatable</div>
-        </div>
-        <div><br>made by someone who doomscrolls too</div>
-<script>
-    (function() {
-        console.log("💿 the daily scroll — handcrafted with intention");
-        const allCards = document.querySelectorAll('.vibe-card');
-        if (allCards.length) {
-            allCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    const titleElem = card.querySelector('h3');
-                    if (titleElem) {
-                        console.log(`✨ vibe check: ${titleElem.innerText}`);
-                    }
-                });
-            });
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.shadowMap.enabled = true;
+        document.body.appendChild(renderer.domElement);
+
+        scene.add(new THREE.AmbientLight(0x404060, 0.5));
+        const light = new THREE.DirectionalLight(0xffeedd, 1.2);
+        light.position.set(5, 8, 4);
+        light.castShadow = true;
+        scene.add(light);
+        scene.add(new THREE.DirectionalLight(0x4488ff, 0.4));
+
+        function makeTexture(color1, color2) {
+            const c = document.createElement('canvas');
+            c.width = 256; c.height = 256;
+            const ctx = c.getContext('2d');
+            const grad = ctx.createLinearGradient(0, 0, 256, 256);
+            grad.addColorStop(0, color1);
+            grad.addColorStop(0.5, color2);
+            grad.addColorStop(1, '#fdcb6e');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 256, 256);
+            for (let i = 0; i < 30; i++) {
+                ctx.fillStyle = `rgba(255,255,255,${Math.random()*0.2})`;
+                ctx.beginPath();
+                ctx.arc(Math.random()*256, Math.random()*256, Math.random()*3+1, 0, Math.PI*2);
+                ctx.fill();
+            }
+            return new THREE.CanvasTexture(c);
         }
-    })();
-</script>
+
+        function makeChecker() {
+            const c = document.createElement('canvas');
+            c.width = 256; c.height = 256;
+            const ctx = c.getContext('2d');
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fillRect(0, 0, 256, 256);
+            for (let r = 0; r < 8; r++) {
+                for (let col = 0; col < 8; col++) {
+                    if ((r+col)%2===0) {
+                        ctx.fillStyle = '#6c5ce7';
+                    } else {
+                        ctx.fillStyle = '#fd79a8';
+                    }
+                    ctx.fillRect(col*32, r*32, 32, 32);
+                }
+            }
+            return new THREE.CanvasTexture(c);
+        }
+
+        const group = new THREE.Group();
+        scene.add(group);
+
+        const cube = new THREE.Mesh(
+            new THREE.BoxGeometry(1.2, 1.2, 1.2),
+            new THREE.MeshStandardMaterial({ map: makeTexture('#6c5ce7', '#fd79a8'), roughness: 0.3 })
+        );
+        cube.castShadow = true;
+        cube.position.x = -1.5;
+        group.add(cube);
+
+        const sphere = new THREE.Mesh(
+            new THREE.SphereGeometry(0.9, 32, 32),
+            new THREE.MeshStandardMaterial({ map: makeChecker(), roughness: 0.4 })
+        );
+        sphere.castShadow = true;
+        sphere.position.x = 1.5;
+        group.add(sphere);
+
+        const ground = new THREE.Mesh(
+            new THREE.PlaneGeometry(10, 10),
+            new THREE.ShadowMaterial({ opacity: 0.3 })
+        );
+        ground.rotation.x = -Math.PI/2;
+        ground.position.y = -0.9;
+        ground.receiveShadow = true;
+        scene.add(ground);
+
+        const stars = new THREE.Points(
+            new THREE.BufferGeometry().setFromPoints(
+                Array.from({ length: 400 }, () => new THREE.Vector3(
+                    (Math.random()-0.5)*60,
+                    (Math.random()-0.5)*40,
+                    (Math.random()-0.5)*60
+                ))
+            ),
+            new THREE.PointsMaterial({ color: 0x8888ff, size: 0.08, transparent: true, opacity: 0.8 })
+        );
+        scene.add(stars);
+
+        let dragging = false, px = 0, py = 0, rx = 0, ry = 0;
+
+        renderer.domElement.addEventListener('mousedown', e => { dragging = true; px = e.clientX; py = e.clientY; });
+        window.addEventListener('mouseup', () => dragging = false);
+        window.addEventListener('mousemove', e => {
+            if (!dragging) return;
+            const dx = e.clientX - px, dy = e.clientY - py;
+            ry += dx * 0.008;
+            rx += dy * 0.008;
+            rx = Math.max(-1.5, Math.min(1.5, rx));
+            group.rotation.x = rx;
+            group.rotation.y = ry;
+            px = e.clientX; py = e.clientY;
+        });
+
+        renderer.domElement.addEventListener('touchstart', e => {
+            const t = e.touches[0];
+            px = t.clientX; py = t.clientY;
+        }, { passive: true });
+        renderer.domElement.addEventListener('touchmove', e => {
+            const t = e.touches[0];
+            const dx = t.clientX - px, dy = t.clientY - py;
+            ry += dx * 0.008;
+            rx += dy * 0.008;
+            rx = Math.max(-1.5, Math.min(1.5, rx));
+            group.rotation.x = rx;
+            group.rotation.y = ry;
+            px = t.clientX; py = t.clientY;
+        }, { passive: true });
+
+        function animate() {
+            stars.rotation.y += 0.0003;
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
 </body>
 </html>
